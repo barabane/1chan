@@ -12,9 +12,6 @@ def validate_tag(tag: str) -> str:
     return tag
 
 
-# BoardTag = Annotated[str, AfterValidator(validate_tag)]
-
-
 class BoardCreateDTO(BaseCreateDTO, BoardCreateScheme):
     pass
 

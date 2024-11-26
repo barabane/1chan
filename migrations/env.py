@@ -5,6 +5,10 @@ from sqlalchemy import engine_from_config, pool
 
 from src.config import settings
 from src.database.models.base import BaseModel
+from src.database.models.board import Board  # noqa
+from src.database.models.post import Post  # noqa
+from src.database.models.thread import Thread  # noqa
+from src.database.models.user import User  # noqa
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

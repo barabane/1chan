@@ -1,6 +1,7 @@
+import uuid
 from datetime import datetime
 
-from sqlalchemy import func
+from sqlalchemy import ForeignKey, func
 from sqlalchemy.dialects.postgresql import INTEGER, TIMESTAMP, VARCHAR
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -23,3 +24,5 @@ class Thread(BaseModel):
     created_at: Mapped[datetime] = mapped_column(
         TIMESTAMP(), nullable=False, server_default=func.now()
     )
+
+    board_id: Mapped[uuid.UUID] = mapped_column(ForeignKey('board.id'), nullable=False)
