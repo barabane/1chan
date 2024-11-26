@@ -1,3 +1,8 @@
+import uuid
+from typing import Optional
+
+from pydantic import Field
+
 from src.schemas.base import (
     BaseCreateScheme,
     BaseGetScheme,
@@ -7,7 +12,8 @@ from src.schemas.base import (
 
 
 class UserCreateScheme(BaseCreateScheme):
-    pass
+    email: Optional[str] = Field(max_length=50, default=None)
+    ip_address: Optional[str] = Field(max_length=15)
 
 
 class UserUpdateScheme(BaseUpdateScheme):
@@ -15,7 +21,9 @@ class UserUpdateScheme(BaseUpdateScheme):
 
 
 class UserGetScheme(BaseGetScheme):
-    pass
+    id: uuid.UUID | str
+    email: Optional[str] = Field(max_length=50, default=None)
+    ip_address: Optional[str] = Field(max_length=15)
 
 
 class UserSchemas(BaseSChemas):
