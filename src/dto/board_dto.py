@@ -1,15 +1,9 @@
-from src.dto.base import BaseCreateDTO, BaseGetDTO, BaseUpdateDTO
+from src.dto.base import BaseCreateDTO, BaseDTO, BaseGetDTO, BaseUpdateDTO
 from src.schemas.board_schemas import (
     BoardCreateScheme,
     BoardGetScheme,
     BoardUpdateScheme,
 )
-
-
-def validate_tag(tag: str) -> str:
-    if not tag.startswith('#'):
-        assert tag, ' should start with #'
-    return tag
 
 
 class BoardCreateDTO(BaseCreateDTO, BoardCreateScheme):
@@ -24,7 +18,7 @@ class BoardGetDTO(BaseGetDTO, BoardGetScheme):
     pass
 
 
-class BoardDTO:
+class BoardDTO(BaseDTO):
     def __init__(
         self,
         create_dto: BoardCreateDTO = None,
@@ -39,4 +33,6 @@ class BoardDTO:
 
 
 def get_board_dto() -> BoardDTO:
-    return BoardDTO()
+    return BoardDTO(
+        create_dto=BoardCreateDTO, update_dto=BoardUpdateDTO, get_dto=BoardGetDTO
+    )

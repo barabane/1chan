@@ -1,4 +1,4 @@
-from dto.board_dto import get_board_dto
+from src.dto.board_dto import get_board_dto
 from src.repositories.board_repository import get_board_repository
 from src.schemas.board_schemas import get_board_schemas
 from src.services.base import BaseService
