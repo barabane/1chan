@@ -13,7 +13,7 @@ class Thread(BaseModel):
 
     number: Mapped[int] = mapped_column(
         INTEGER,
-        Sequence('unique_number_id'),
+        Sequence('thread_unique_number'),
         unique=True,
         autoincrement=True,
         nullable=False,
