@@ -20,6 +20,7 @@ class ThreadCreateScheme(BaseCreateScheme):
     posters_count: Optional[int] = Field(ge=0, default=0)
     posts_count: Optional[int] = Field(ge=0, default=0)
     files_count: Optional[int] = Field(ge=0, default=0)
+    board_id: uuid.UUID
 
 
 class ThreadUpdateScheme(BaseUpdateScheme):
@@ -37,6 +38,7 @@ class ThreadGetScheme(BaseGetScheme):
     posts_count: int = Field(ge=0)
     files_count: int = Field(ge=0)
     created_at: datetime
+    board_id: uuid.UUID | str
 
 
 class ThreadSchemas(BaseSChemas):
