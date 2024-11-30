@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import ForeignKey, func
+from sqlalchemy import ForeignKey, Sequence, func
 from sqlalchemy.dialects.postgresql import INTEGER, TIMESTAMP, VARCHAR
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -12,7 +12,11 @@ class Thread(BaseModel):
     __tablename__ = 'thread'
 
     number: Mapped[int] = mapped_column(
-        INTEGER, unique=True, autoincrement=True, nullable=False
+        INTEGER,
+        Sequence('unique_number_id'),
+        unique=True,
+        autoincrement=True,
+        nullable=False,
     )
     title: Mapped[str] = mapped_column(VARCHAR(200), nullable=False)
     text: Mapped[str] = mapped_column(VARCHAR(15000), nullable=False)
