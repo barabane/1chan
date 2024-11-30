@@ -12,10 +12,16 @@ class ThreadRouter(BaseRouter):
             path='/thread/local/top/{board_id}', func=self.service.get_local_top
         )
 
-        self.add_route(path='/thread/{thread_id}/like', func=self.service.like_thread)
+        self.add_route(
+            path='/thread/{thread_id}/like',
+            func=self.service.like_thread,
+            methods=['PATCH'],
+        )
 
         self.add_route(
-            path='/thread/{thread_id}/dislike', func=self.service.dislike_thread
+            path='/thread/{thread_id}/dislike',
+            func=self.service.dislike_thread,
+            methods=['PATCH'],
         )
 
 
