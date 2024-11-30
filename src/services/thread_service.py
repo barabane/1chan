@@ -41,6 +41,16 @@ class ThreadService(BaseService):
             for thread in local_top_threads
         ]
 
+    async def like_thread(
+        self, thread_id: str, session: AsyncSession = Depends(get_async_session)
+    ) -> None:
+        await self.repository.like_thread(thread_id=thread_id, session=session)
+
+    async def dislike_thread(
+        self, thread_id: str, session: AsyncSession = Depends(get_async_session)
+    ) -> None:
+        await self.repository.dislike_thread(thread_id=thread_id, session=session)
+
 
 def get_thread_service() -> ThreadService:
     return ThreadService(

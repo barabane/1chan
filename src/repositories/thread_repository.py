@@ -1,6 +1,6 @@
 from typing import List, Literal
 
-from sqlalchemy import select
+from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.database.models.thread import Thread
@@ -27,6 +27,22 @@ class ThreadRepository(BaseRepository):
 
         top_threads = await session.execute(query)
         return top_threads.scalars().all()
+
+    async def like_thread(self, thread_id: str, session: AsyncSession):
+        query = (
+            update(Thread)
+            .where(Thread.id == thread_id)
+            .values(likes_count=Thread.likes_count + 1)
+        )
+        await session.execute(query)
+
+    async def dislike_thread(self, thread_id: str, session: AsyncSession):
+        query = (
+            update(Thread)
+            .where(Thread.id == thread_id)
+            .values(dislikes_count=Thread.dislikes_count + 1)
+        )
+        await session.execute(query)
 
 
 def get_thread_repository() -> ThreadRepository:
