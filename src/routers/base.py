@@ -41,11 +41,11 @@ class BaseRouter(abc.ABC):
         old_path: str,
         new_path: str,
         func: Callable,
-        methods: List[str] = ['GET'],
+        method: str = 'GET',
         **kwargs,
     ):
-        self.delete_route(path=old_path, method='GET')
-        self.add_route(path=new_path, func=func, methods=methods, **kwargs)
+        self.delete_route(path=old_path, method=method)
+        self.add_route(path=new_path, func=func, methods=[method], **kwargs)
 
     def __define_base_routes(self):
         get_scheme: BaseGetScheme = self.service.schemas.get_scheme
