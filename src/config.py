@@ -31,6 +31,12 @@ class Settings(CustomBaseSettings):
     DATABASE_URL: PostgresDsn | None = None
     TEST_DATABASE_URL: PostgresDsn | None = None
 
+    S3_ENDPOINT_URL: str
+    BUCKET_NAME: str
+    REGION_NAME: str
+    AWS_SECRET_ACCESS_KEY: str
+    AWS_ACCESS_KEY_ID: str
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 

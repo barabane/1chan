@@ -23,7 +23,7 @@ class BaseRepository(ABC):
 
     async def add(self, entity: BaseDTO, session: AsyncSession) -> BaseModel:
         res = await session.execute(
-            insert(self.model).values(**entity.model_dump()).returning(self.model)
+            insert(self.model).values(**entity.__dict__).returning(self.model)
         )
         return res.scalar_one()
 
