@@ -11,5 +11,9 @@ class PostRouter(BaseRouter):
             old_path='', new_path='', func=self.service.add, method='POST'
         )
 
+        self.add_route(
+            path='/files/add/{post_id}', func=self.service.add_files, methods=['POST']
+        )
+
 
 post_router = PostRouter(service=get_post_service(), prefix='/post', tags=['Post'])
