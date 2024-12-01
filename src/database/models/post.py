@@ -18,9 +18,7 @@ class Post(BaseModel):
         nullable=False,
     )
     text: Mapped[str] = mapped_column(VARCHAR(15000), nullable=False)
-    author_id: Mapped[str] = mapped_column(
-        ForeignKey('user.ip_address'), nullable=False
-    )
+    user_id: Mapped[str] = mapped_column(ForeignKey('user.id'), nullable=False)
     thread_id: Mapped[str] = mapped_column(ForeignKey('thread.id'), nullable=False)
     created_at: Mapped[datetime] = mapped_column(
         TIMESTAMP(), nullable=False, server_default=func.now()

@@ -12,8 +12,8 @@ from src.schemas.base import (
 
 
 class PostCreateScheme(BaseCreateScheme):
-    author_id: str
-    thread_id: str
+    user_id: uuid.UUID | str
+    thread_id: uuid.UUID | str
     text: str = Field(max_length=15000)
 
 
@@ -25,8 +25,8 @@ class PostGetScheme(BaseGetScheme):
     id: uuid.UUID | str
     number: int = Field(ge=0)
     text: str = Field(max_length=15000)
-    author_id: str
-    thread_id: str
+    user_id: uuid.UUID | str
+    thread_id: uuid.UUID | str
     created_at: datetime
 
 
