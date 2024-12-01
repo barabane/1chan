@@ -1,5 +1,4 @@
 from aiobotocore.session import get_session
-from fastapi import UploadFile
 
 from src.config import settings
 
@@ -20,17 +19,19 @@ class S3Client:
         self.aws_secret_access_key = aws_secret_access_key
         self.aws_access_key_id = aws_access_key_id
 
-    async def upload_file(self, file: UploadFile, file_name: str):
+    async def upload_file(self, file: bytes, file_name: str):
         async with self.session.create_client(
+            's3',
             region_name=self.region_name,
             aws_secret_access_key=self.aws_secret_access_key,
             aws_access_key_id=self.aws_access_key_id,
         ) as client:
-            await client.put_object(Bucket=self.bucket, Key=file_name, Body=file.file)
+            await client.put_object(Bucket=self.bucket, Key=file_name, Body=file)
             return self.get_file_link(file_name)
 
     async def delete_file(self, file_name: str):
         async with self.session.create_client(
+            's3',
             region_name=self.region_name,
             aws_secret_access_key=self.aws_secret_access_key,
             aws_access_key_id=self.aws_access_key_id,
