@@ -8,9 +8,14 @@ from src.database.database import get_async_session
 from src.database.models.post import Post
 from src.dto.file_dto import FileCreateDTO
 from src.dto.post_dto import PostCreateDTO, PostDTO, get_post_dto
-from src.exceptions import InternalServerErrorException
+from src.exceptions import (
+    FilesTotalSizeTooLarge,
+    InternalServerErrorException,
+    TooManyFilesException,
+)
 from src.repositories.post_repository import PostRepository, get_post_repository
 from src.schemas.base import BaseSChemas
+from src.schemas.file_schemas import FileGetScheme
 from src.schemas.post_schemas import get_post_schemas
 from src.services.base import BaseService
 from src.services.file_service import FileService, get_file_service
@@ -42,6 +47,18 @@ class PostService(BaseService):
         files: List[UploadFile],
         session: AsyncSession = Depends(get_async_session),
     ) -> List[str]:
+        post_files: List[FileGetScheme] = await self.file_service.get_all(
+            query_params={'post_id': post_id}, session=session
+        )
+
+        if len(post_files) + len(files) > 4:
+            raise TooManyFilesException()
+
+        file_sizes = [file.size for file in files]
+
+        if sum(file_sizes) > 1048576:
+            raise FilesTotalSizeTooLarge()
+
         try:
             links = []
             for file in files:
