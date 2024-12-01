@@ -1,9 +1,11 @@
+import uuid
+
 from src.dto.base import BaseCreateDTO, BaseDTO, BaseGetDTO, BaseUpdateDTO
 from src.schemas.file_schemas import FileCreateScheme, FileGetScheme, FileUpdateScheme
 
 
 class FileCreateDTO(BaseCreateDTO, FileCreateScheme):
-    pass
+    id: uuid.UUID | str
 
 
 class FileUpdateDTO(BaseUpdateDTO, FileUpdateScheme):

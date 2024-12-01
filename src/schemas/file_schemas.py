@@ -16,8 +16,8 @@ class FileCreateScheme(BaseCreateScheme):
     name: str
     link: str
     size: float = Field(ge=0.0)
-    width: Optional[int] = Field(ge=0)
-    height: Optional[int] = Field(ge=0)
+    width: Optional[int] = Field(ge=0, default=None)
+    height: Optional[int] = Field(ge=0, default=None)
     post_id: uuid.UUID | str
 
 
@@ -31,8 +31,8 @@ class FileGetScheme(BaseGetScheme):
     link: str
     size: float = Field(ge=0.0)
     created_at: datetime
-    width: Optional[int] = Field(ge=0)
-    height: Optional[int] = Field(ge=0)
+    width: Optional[int] = Field(ge=0, default=None)
+    height: Optional[int] = Field(ge=0, default=None)
     post_id: uuid.UUID | str
 
 

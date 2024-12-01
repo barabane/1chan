@@ -51,7 +51,11 @@ class PostService(BaseService):
                 )
                 links.append(file_link)
                 file_dto = FileCreateDTO(
-                    name=file_name, link=file_link, size=file.size, post_id=post_id
+                    id=file_name,
+                    name=file_name,
+                    link=file_link,
+                    size=file.size,
+                    post_id=post_id,
                 )
             await self.file_service.add(entity=file_dto, session=session)
             return links

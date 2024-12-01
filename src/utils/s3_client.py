@@ -23,6 +23,7 @@ class S3Client:
         async with self.session.create_client(
             's3',
             region_name=self.region_name,
+            endpoint_url=self.endpoint_url,
             aws_secret_access_key=self.aws_secret_access_key,
             aws_access_key_id=self.aws_access_key_id,
         ) as client:
@@ -33,13 +34,14 @@ class S3Client:
         async with self.session.create_client(
             's3',
             region_name=self.region_name,
+            endpoint_url=self.endpoint_url,
             aws_secret_access_key=self.aws_secret_access_key,
             aws_access_key_id=self.aws_access_key_id,
         ) as client:
             await client.delete_object(Bucket=self.bucket, Key=file_name)
 
     def get_file_link(self, file_name: str) -> str:
-        return f'{self.endpoint_url}{self.bucket_name}/{file_name}'
+        return f'{self.endpoint_url}{self.bucket}/{file_name}'
 
 
 s3_client = S3Client()
