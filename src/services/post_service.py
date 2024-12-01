@@ -67,6 +67,7 @@ class PostService(BaseService):
                     file=file.file, file_name=file_name
                 )
                 links.append(file_link)
+
                 file_dto = FileCreateDTO(
                     id=file_name,
                     name=file_name,
@@ -78,6 +79,7 @@ class PostService(BaseService):
             return links
         except Exception as ex:
             await session.rollback()
+            [await s3_client.delete_file(link.split('/')[-1]) for link in links]
             raise InternalServerErrorException(detail=str(ex))
 
 
