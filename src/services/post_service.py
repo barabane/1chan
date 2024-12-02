@@ -2,6 +2,7 @@ import uuid
 from typing import List
 
 from fastapi import Depends, UploadFile
+from PIL import Image
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.database.database import get_async_session
@@ -68,14 +69,22 @@ class PostService(BaseService):
                 )
                 links.append(file_link)
 
+                width = None
+                height = None
+                if file.content_type.startswith('image/'):
+                    image = Image.open(file.file)
+                    width, height = image.size
+
                 file_dto = FileCreateDTO(
                     id=file_name,
                     name=file_name,
                     link=file_link,
                     size=file.size,
+                    width=width,
+                    height=height,
                     post_id=post_id,
                 )
-            await self.file_service.add(entity=file_dto, session=session)
+                await self.file_service.add(entity=file_dto, session=session)
             return links
         except Exception as ex:
             await session.rollback()
