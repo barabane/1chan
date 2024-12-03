@@ -1,9 +1,9 @@
 from src.routers.base import BaseRouter
-from src.services.post_service import get_post_service
+from src.services.user_service import get_user_service
 
 
 class UserRouter(BaseRouter):
     pass
 
 
-user_router = UserRouter(service=get_post_service(), prefix='/user', tags=['User'])
+user_router = UserRouter(service=get_user_service(), prefix='/user', tags=['User'])
