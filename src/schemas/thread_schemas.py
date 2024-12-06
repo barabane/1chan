@@ -20,7 +20,7 @@ class ThreadCreateScheme(BaseCreateScheme):
     posters_count: Optional[int] = Field(ge=0, default=0)
     posts_count: Optional[int] = Field(ge=0, default=0)
     files_count: Optional[int] = Field(ge=0, default=0)
-    board_id: uuid.UUID
+    board_id: uuid.UUID | str
 
 
 class ThreadUpdateScheme(BaseUpdateScheme):
