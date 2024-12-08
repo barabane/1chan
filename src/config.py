@@ -9,7 +9,7 @@ class CustomBaseSettings(BaseSettings):
 
 
 class Settings(CustomBaseSettings):
-    MODE: Literal['TEST', 'PROD', 'DEV'] = 'TEST'
+    MODE: Literal['TEST', 'PROD', 'DEV'] = 'DEV'
 
     POSTGRES_NAME: str
     POSTGRES_PASS: str
