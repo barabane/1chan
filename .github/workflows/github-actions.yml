@@ -52,7 +52,7 @@ jobs:
           uses: actions/checkout@v4
 
         - name: set up Python
-          uses: actions/setup-python@v5
+          uses: actions/setup-python@v3
           with:
             python-version: 3.12
 
@@ -61,8 +61,9 @@ jobs:
               python -m pip install --upgrade pip
               pip install poetry
               poetry install
+              poetry add pytest
 
         - name: Run Pytest
           run: |
-              poetry add pytest
+              source $(poetry env info --path)/bin/activate
               pytest tests/ --maxfail=1 --disable-warnings
