@@ -65,5 +65,4 @@ jobs:
 
         - name: Run Pytest
           run: |
-              source $(poetry env info --path)/bin/activate
-              pytest tests/ --maxfail=1 --disable-warnings
+              run -m pytest  -v -s --maxfail=1 --disable-warnings
