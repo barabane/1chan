@@ -46,7 +46,25 @@ jobs:
     tests:
       runs-on: ubuntu-latest
       env:
-        MODE: TEST
+        POSTGRES_NAME: ${{secrets.POSTGRES_NAME}}
+        POSTGRES_USER: ${{secrets.POSTGRES_USER}}
+        POSTGRES_PASS: ${{secrets.POSTGRES_PASS}}
+        POSTGRES_HOST: ${{secrets.POSTGRES_HOST}}
+        POSTGRES_PORT: ${{secrets.POSTGRES_PORT}}
+        TEST_POSTGRES_NAME: ${{secrets.TEST_POSTGRES_NAME}}
+        TEST_POSTGRES_USER: ${{secrets.TEST_POSTGRES_USER}}
+        TEST_POSTGRES_PASS: ${{secrets.TEST_POSTGRES_PASS}}
+        TEST_POSTGRES_HOST: ${{secrets.TEST_POSTGRES_HOST}}
+        TEST_POSTGRES_PORT: ${{secrets.TEST_POSTGRES_PORT}}
+        DB_POOL_SIZE: ${{secrets.DB_POOL_SIZE}}
+        DB_POOL_SIZE_MAX_OVERFLOW: ${{secrets.DB_POOL_SIZE_MAX_OVERFLOW}}
+        DB_POOL_TTL: ${{secrets.DB_POOL_TTL}}
+        DB_POOL_PRE_PING: ${{secrets.DB_POOL_PRE_PING}}
+        S3_ENDPOINT_URL: ${{secrets.S3_ENDPOINT_URL}}
+        BUCKET_NAME: ${{secrets.BUCKET_NAME}}
+        REGION_NAME: ${{secrets.REGION_NAME}}
+        AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+        AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
       steps:
         - name: checkout
           uses: actions/checkout@v4
