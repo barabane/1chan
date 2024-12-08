@@ -45,6 +45,9 @@ jobs:
     
     tests:
       runs-on: ubuntu-latest
+      defaults:
+        run:
+          working-directory: ./
       env:
         MODE: TEST
       steps:
@@ -61,8 +64,7 @@ jobs:
               python -m pip install --upgrade pip
               pip install poetry
               poetry install
-              poetry add pytest
 
         - name: Run Pytest
           run: |
-            pytest  -v -s --maxfail=1 --disable-warnings
+            pytest -v -s --maxfail=1 --disable-warnings
