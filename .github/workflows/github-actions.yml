@@ -64,5 +64,4 @@ jobs:
 
         - name: Run Pytest
           run: |
-            which pytest
             poetry run pytest -v -s --maxfail=1 --disable-warnings
